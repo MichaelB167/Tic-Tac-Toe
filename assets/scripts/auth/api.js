@@ -5,7 +5,7 @@ const app = require('../app-data');
 const signUp = (success, failure, data) => {
   $.ajax({
     method: 'POST',
-    url: app.api + 'Sign Up',
+    url: app.api + 'sign-up',
     data,
   })
   .done(success)
@@ -15,7 +15,7 @@ const signUp = (success, failure, data) => {
 const signIn = (success, failure, data) => {
   $.ajax({
     method: 'POST',
-    url: app.api + 'Sign In',
+    url: app.api + 'sign-in',
     data,
   })
   .done(success)
