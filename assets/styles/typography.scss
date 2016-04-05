@@ -1,0 +1,24 @@
+.square {
+  border: solid 5px;
+  border-color: $border-color;
+  display: table-cell;
+  height: 150px;
+  width: 150px;
+}
+
+.gameboard {
+  margin-left: 200px;
+  margin-top: 200px;
+}
+
+.nav-buttons {
+  margin-left: 50%;
+}
+
+.navbar {
+  background-color: $background-color1;
+}
+
+.h1 {
+  color: $font-color;
+}
