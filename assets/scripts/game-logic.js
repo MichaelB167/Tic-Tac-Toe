@@ -4,6 +4,10 @@ let boardArray = ['', '', '', '', '', '', '', '', ''];
 
 let newArray = ["c0", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"];
 
+let newArraySquare = function(square) {
+  return newArray.indexof(square);
+};
+
 let turnCounter = 0;
 
 let game = "active";
@@ -84,6 +88,9 @@ const gameResult = function() {
   }
   turnCounter +=1;
 };
+$(".square").on(click, function(){
+
+}
 
 $(".gameboard").find(".square").click(function(){
   $(this).text("x").addClass("player");
