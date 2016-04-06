@@ -26,10 +26,21 @@ const turn = function () {
   return turnCounter%2 === 0 ? "X" : "O";
 };
 
+const ifWin = function () {
+  game = "inactive";
+  if (turn() === "X") {
+    playerXWins += 1;
+    $('.player-X-wins').text(playerXWins);
+  } else {
+    playerOWins += 1;
+    $('.player-O-wins').text(playerOWins);
+  }
+};
+
 const columnWin = function(activeBoard) {
   for (let i = 0; i < 2; i++) {
     if (((activeBoard[i] === activeBoard[i+3]) && (activeBoard[i] === activeBoard[i+6])) && activeBoard[i] !== '') {
-    return ;
+    ifWin();
     }
   }
 };
@@ -37,7 +48,7 @@ const columnWin = function(activeBoard) {
 const rowWin = function(activeBoard) {
   for (let i = 0; i < 6; i++) {
     if (((activeBoard[i] === activeBoard[i+1]) && (activeBoard[i] === activeBoard[i+2])) && activeBoard[i] !== '') {
-    return ;
+    ifWin();
     }
   }
 };
@@ -46,12 +57,32 @@ const diagonalWin = function(activeBoard) {
   if (((activeBoard[0] === activeBoard[4]) && (activeBoard[0] === activeBoard[8])) && activeBoard[4] !== '') {
     return ;
   } else if (((activeBoard[2] === activeBoard[4]) && (activeBoard[0] === activeBoard[6])) && activeBoard[4] !== '') {
-    return ;
+    ifWin();
   }
 };
 
 const tie = function(activeBoard) {
+  let tieStatus = true;
+  for (let i = 0; i < 8; i++) {
+    if (activeBoard[i] === "") {
+      tieStatus = false;
+    }
+  }
+  if (tieStatus === true) {
+    game = "inactive";
+  }
+};
 
+const gameResult = function() {
+  columnWin(boardArray);
+  if (game === "active") {
+    rowWin(boardArray);
+  } else if (game === "active") {
+    diagonalWin(boardArray);
+  } else if (game === "active") {
+    tie(boardArray);
+  }
+  turnCounter +=1;
 };
 
 $(".gameboard").find(".square").click(function(){
