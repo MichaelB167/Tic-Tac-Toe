@@ -8,13 +8,22 @@ let turnCounter = 0;
 
 let game = "active";
 
-const turn = function () {
-  return turnCounter%2 === 0 ? "X" : "O";
-};
+let playerXWins = 0;
+
+let playerOWins = 0;
 
 const clear = function () {
  $(".square").text("");
  boardArray = ['', '', '', '', '', '', '', '', ''];
+};
+
+$(".reset").on("click", function() {
+  clear();
+  game = "active";
+});
+
+const turn = function () {
+  return turnCounter%2 === 0 ? "X" : "O";
 };
 
 const columnWin = function(activeBoard) {
@@ -42,8 +51,8 @@ const diagonalWin = function(activeBoard) {
 };
 
 const tie = function(activeBoard) {
-  
-}
+
+};
 
 $(".gameboard").find(".square").click(function(){
   $(this).text("x").addClass("player");
