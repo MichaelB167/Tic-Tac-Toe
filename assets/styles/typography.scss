@@ -2,6 +2,11 @@ body {
   background-color: $background-color;
 }
 
+header {
+  color: $font-color;
+  text-align: center;
+}
+
 .navbar {
   background-color: $dark-blue;
 }
@@ -11,8 +16,8 @@ body {
   text-align: center;
 }
 
-.h1 {
-  color: $font-color;
+.ul {
+  display: inline;
 }
 //square
 .square {
@@ -25,7 +30,7 @@ body {
 
 .gameboard {
   margin: 0 auto;
-  margin-top: 150px;
+  margin-top: 70px;
   width: 40%;
 }
 
