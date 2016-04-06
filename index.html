@@ -122,32 +122,34 @@
     </header>
 
     <!--scoreboard-->
+  <div class="game-area">
     <div class="scoreboard">
       <ul>
-        <div class="player-X-wins">0</div>
-        <div class="player-O-wins">0</div>
-        <button type="button" class="btn btn-default" id="Reset">Reset</button>
+        <div class="player-turn">Player X is up</div>
+        <div class="player-X-wins">X wins: 0</div>
+        <div class="player-O-wins">0 wins: 0</div>
+        <button type="button" class="btn btn-primary" id="Reset">Reset</button>
       </ul>
     </div>
-
     <div class="gameboard">
       <table>
         <tr id ="row1">
-          <td class="square top left" id="c0"></div>
-          <td class="square top" id="c1"></div>
-          <td class="square top right" id="c2"></div>
+          <td class="square top left" id="c0"></td>
+          <td class="square top" id="c1"></td>
+          <td class="square top right" id="c2"></td>
         </tr>
         <tr id ="row2">
-          <td class="square mid left" id="c3"></div>
-          <td class="square" id="c4"></div>
-          <td class="square mid right" id="c5"></div>
+          <td class="square mid left" id="c3"></td>
+          <td class="square" id="c4"></td>
+          <td class="square mid right" id="c5"></td>
         </tr>
         <tr id ="row3">
-          <td class="square bottom left" id="c6"></div>
-          <td class="square bottom" id="c7"></div>
-          <td class="square bottom right" id="c8"></div>
+          <td class="square bottom left" id="c6"></td>
+          <td class="square bottom" id="c7"></td>
+          <td class="square bottom right" id="c8"></td>
         </tr>
       </table>
     </div>
+  </div>
   </body>
 </html>

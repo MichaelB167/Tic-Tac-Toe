@@ -19,19 +19,28 @@ header {
 .ul {
   display: inline;
 }
-//square
+
+.game-area {
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 30%;
+}
+
+.scoreboard {
+  font-size: 15px;
+  text-align: center;
+}
+
+.gameboard {
+  margin-top: 30px;
+}
+
 .square {
   border: solid 5px;
   border-color: $border-color;
   display: table-cell;
   height: 150px;
   width: 150px;
-}
-
-.gameboard {
-  margin: 0 auto;
-  margin-top: 70px;
-  width: 40%;
 }
 
 //for player icon
