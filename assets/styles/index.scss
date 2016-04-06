@@ -2,25 +2,3 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 @import 'colors';
 @import 'typography';
-
-$border-color: #808080;
-$background-color1: #570010;
-
-.square {
-  border: solid 5px;
-  border-color: $border-color;
-  display: table-cell;
-  height: 150px;
-  width: 150px;
-}
-
-.gameboard {
-  margin-left: 200px;
-  margin-top: 200px;
-
-
-}
-
-.navbar {
-  background-color: $background-color1;
-}

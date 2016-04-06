@@ -1,11 +1,14 @@
+body {
+  background-color: $background-color;
+}
+
 .navbar {
   background-color: $background-color1;
   position: relative;
 }
 
 .nav-buttons {
-  margin-left: 50%;
-  position: absolute;
+  text-align: center;
 }
 
 .h1 {
@@ -21,6 +24,13 @@
 }
 
 .gameboard {
-  margin-left: 200px;
-  margin-top: 200px;
+  margin: auto;
+  margin-top: 90px;
+  padding: 10px;
+  width: 40%;
+}
+
+.player {
+  font-size: 70px;
+  text-align: center;
 }
