@@ -103,10 +103,10 @@ $(".square").on("click", function() {
     $(this).text(turn());
     boardArray[index] = turn();
     if (turn() === "X") {
-      $(this).text("x").addClass("player");
+      $(this).text("X").addClass("player");
     }
     if (turn() === "O") {
-      $(this).text("o").addClass("player");
+      $(this).text("O").addClass("player");
     }
     gameResult();
   }
