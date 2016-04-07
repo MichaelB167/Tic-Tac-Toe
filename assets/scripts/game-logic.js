@@ -4,10 +4,6 @@ let boardArray = ['', '', '', '', '', '', '', '', ''];
 
 let newArray = ["c0", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"];
 
-let newArraySquare = function(square) {
-  return newArray.indexof(square);
-};
-
 let turnCounter = 0;
 
 let game = "active";
@@ -16,17 +12,17 @@ let playerXWins = 0;
 
 let playerOWins = 0;
 
-const clear = function () {
+let clear = function () {
  $(".square").text("");
  boardArray = ['', '', '', '', '', '', '', '', ''];
 };
 
-$(".reset").on("click", function() {
+$("#reset").on("click", function() {
   clear();
   game = "active";
 });
 
-const turn = function () {
+let turn = function () {
   return turnCounter%2 === 0 ? "X" : "O";
 };
 
@@ -88,10 +84,30 @@ const gameResult = function() {
   }
   turnCounter +=1;
 };
-$(".square").on(click, function(){
 
-}
+let newArraySquare = function(square) {
+  return newArray.indexOf(square);
+};
 
-$(".gameboard").find(".square").click(function(){
-  $(this).text("x").addClass("player");
+const isMoveValid = function(move) {
+  if ((move !== "X") && (move !== "O") && (game === "active")) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+$(".square").on("click", function() {
+  const index = newArraySquare($(this).attr('id'));
+  if (isMoveValid(boardArray[index]) === true) {
+    $(this).text(turn());
+    boardArray[index] = turn();
+    if (turn() === "X") {
+      $(this).text("x").addClass("player");
+    }
+    if (turn() === "O") {
+      $(this).text("o").addClass("player");
+    }
+    gameResult();
+  }
 });
