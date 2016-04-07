@@ -6,7 +6,7 @@ const signUp = (success, failure, data) => {
   $.ajax({
     method: 'POST',
     url: app.api + '/sign-up',
-    data,
+    data
   })
   .done(success)
   .fail(failure);
@@ -16,7 +16,7 @@ const signIn = (success, failure, data) => {
   $.ajax({
     method: 'POST',
     url: app.api + '/sign-in',
-    data,
+    data
   })
   .done(success)
   .fail(failure);
@@ -43,7 +43,8 @@ const changePassword = (success, failure, data) => {
     headers: {
       Authorization: 'Token token=' + app.user.token,
     },
-  }).done(success)
+  })
+  .done(success)
   .fail(failure);
 };
 

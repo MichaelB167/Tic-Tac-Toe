@@ -12,6 +12,10 @@ const signOutSuccess = () => {
   console.log(app);
 };
 
+const changePasswordSuccess = () => {
+  console.log(app);
+};
+
 const success = (data) => {
   console.log(data);
 };
@@ -24,5 +28,6 @@ module.exports = {
   failure,
   success,
   signInSuccess,
-  signOutSuccess
+  signOutSuccess,
+  changePasswordSuccess
 };
