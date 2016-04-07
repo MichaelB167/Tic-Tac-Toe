@@ -122,15 +122,6 @@
 
     <!--scoreboard-->
   <div class="game-area">
-    <div class="scoreboard">
-      <ul>
-        <div class="player-turn">Player X is up</div>
-        <div class="player-X-wins">X wins: 0</div>
-        <div class="player-O-wins">0 wins: 0</div>
-        <div class="ties">Ties: 0</div>
-        <button type="button" class="btn btn-primary" id="Reset">Reset</button>
-      </ul>
-    </div>
     <div class="gameboard">
       <table>
         <tr id ="row1">
@@ -149,6 +140,12 @@
           <td class="square bottom right" id="c8"></td>
         </tr>
       </table>
+      <div class="scoreboard">
+        <ul>
+          <button type="button" class="btn btn-primary" id="Reset">Reset</button>
+          <div class="winner"></div>
+        </ul>
+      </div>
     </div>
   </div>
   </body>
