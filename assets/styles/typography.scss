@@ -52,4 +52,16 @@ header {
   font-size: 70px;
   text-align: center;
 }
+
+.player-wins {
+  font-size: 25px;
+}
+
+@media (max-width: 750px){
+  .game-area {
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 50%;
+  }
+}
 //test
