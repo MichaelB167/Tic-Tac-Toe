@@ -14,6 +14,7 @@ let playerOWins = 0;
 
 let clear = function () {
  $(".square").text("");
+ $(".player-wins").text("");
  boardArray = ['', '', '', '', '', '', '', '', ''];
 };
 
@@ -30,10 +31,10 @@ const ifWin = function () {
   game = "inactive";
   if (turn() === "X") {
     playerXWins += 1;
-    $('.player-X-wins').text(playerXWins);
+    $('.player-wins').text("Player X Wins!");
   } else {
     playerOWins += 1;
-    $('.player-O-wins').text(playerOWins);
+    $('.player-wins').text("Player O Wins!");
   }
 };
 
