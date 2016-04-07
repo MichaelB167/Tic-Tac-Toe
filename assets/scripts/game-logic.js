@@ -39,7 +39,7 @@ const ifWin = function () {
 };
 
 const columnWin = function(activeBoard) {
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 8; i++) {
     if (((activeBoard[i] === activeBoard[i+3]) && (activeBoard[i] === activeBoard[i+6])) && activeBoard[i] !== '') {
     ifWin();
     }
@@ -47,7 +47,7 @@ const columnWin = function(activeBoard) {
 };
 
 const rowWin = function(activeBoard) {
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 2; i++) {
     if (((activeBoard[i] === activeBoard[i+1]) && (activeBoard[i] === activeBoard[i+2])) && activeBoard[i] !== '') {
     ifWin();
     }
@@ -56,7 +56,7 @@ const rowWin = function(activeBoard) {
 
 const diagonalWin = function(activeBoard) {
   if (((activeBoard[0] === activeBoard[4]) && (activeBoard[0] === activeBoard[8])) && activeBoard[4] !== '') {
-    return ;
+    ifWin();
   } else if (((activeBoard[2] === activeBoard[4]) && (activeBoard[0] === activeBoard[6])) && activeBoard[4] !== '') {
     ifWin();
   }
