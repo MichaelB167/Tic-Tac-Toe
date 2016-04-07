@@ -4,7 +4,10 @@ body {
 
 header {
   color: $font-color;
-  text-align: center;
+  float: left;
+  font-style: 100% helvetica, serif;
+  margin-left: 15%;
+  margin-top: -15px;
 }
 
 .navbar {
