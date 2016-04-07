@@ -39,7 +39,7 @@ const ifWin = function () {
 };
 
 const columnWin = function(activeBoard) {
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 3; i++) {
     if (((activeBoard[i] === activeBoard[i+3]) && (activeBoard[i] === activeBoard[i+6])) && activeBoard[i] !== '') {
     ifWin();
     }
@@ -47,7 +47,7 @@ const columnWin = function(activeBoard) {
 };
 
 const rowWin = function(activeBoard) {
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 9; i+=3) {
     if (((activeBoard[i] === activeBoard[i+1]) && (activeBoard[i] === activeBoard[i+2])) && activeBoard[i] !== '') {
     ifWin();
     }
@@ -55,22 +55,23 @@ const rowWin = function(activeBoard) {
 };
 
 const diagonalWin = function(activeBoard) {
-  if (((activeBoard[0] === activeBoard[4]) && (activeBoard[0] === activeBoard[8])) && activeBoard[4] !== '') {
+  if ((activeBoard[2] === activeBoard[4]) && (activeBoard[2] === activeBoard[6]) && (activeBoard[4] !== '')) {
     ifWin();
-  } else if (((activeBoard[2] === activeBoard[4]) && (activeBoard[0] === activeBoard[6])) && activeBoard[4] !== '') {
+  } else if ((activeBoard[0] === activeBoard[4]) && (activeBoard[0] === activeBoard[8]) && (activeBoard[4] !== '')) {
     ifWin();
   }
 };
 
 const tie = function(activeBoard) {
   let tieStatus = true;
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 9; i++) {
     if (activeBoard[i] === "") {
       tieStatus = false;
     }
   }
   if (tieStatus === true) {
     game = "inactive";
+    $('.player-wins').text("It's a Tie");
   }
 };
 
@@ -78,9 +79,9 @@ const gameResult = function() {
   columnWin(boardArray);
   if (game === "active") {
     rowWin(boardArray);
-  } else if (game === "active") {
+  } if (game === "active") {
     diagonalWin(boardArray);
-  } else if (game === "active") {
+  } if (game === "active") {
     tie(boardArray);
   }
   turnCounter +=1;
