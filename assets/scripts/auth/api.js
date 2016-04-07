@@ -5,7 +5,7 @@ const app = require('../app-data');
 const signUp = (success, failure, data) => {
   $.ajax({
     method: 'POST',
-    url: app.api + 'sign-up',
+    url: app.api + '/sign-up',
     data,
   })
   .done(success)
@@ -15,7 +15,7 @@ const signUp = (success, failure, data) => {
 const signIn = (success, failure, data) => {
   $.ajax({
     method: 'POST',
-    url: app.api + 'sign-in',
+    url: app.api + '/sign-in',
     data,
   })
   .done(success)
@@ -34,6 +34,19 @@ const signOut = (success, failure) => {
   .done(success)
   .fail(failure);
 };
+
+const changePassword = (success, failure, data) => {
+  $.ajax({
+    method: 'PATCH',
+    url: app.api + '/change-password/' + app.user.id,
+    data,
+    headers: {
+      Authorization: 'Token token=' + app.user.token,
+    },
+  }).done(success)
+  .fail(failure);
+};
+
 module.exports = {
-  signUp, signIn, signOut,
+  signUp, signIn, signOut, changePassword
 };

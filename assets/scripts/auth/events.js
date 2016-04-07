@@ -23,6 +23,11 @@ $('#signOutModal').on('submit', function (event) {
       event.preventDefault();
       authApi.signOut(authUi.success, authUi.failure);
     });
+$('#changePasswordModal').on('submit', function(event) {
+      let data = getFormFields(this);
+      event.preventDefault();
+      authApi.changePassword(authUi.changePWSuccess, authUi.failure, data);
+    });
 };
 
 module.exports = {
