@@ -6,7 +6,7 @@ const signUp = (success, failure, data) => {
   $.ajax({
     method: 'POST',
     url: app.api + '/sign-up',
-    data,
+    data
   })
   .done(success)
   .fail(failure);
@@ -16,14 +16,13 @@ const signIn = (success, failure, data) => {
   $.ajax({
     method: 'POST',
     url: app.api + '/sign-in',
-    data,
+    data
   })
   .done(success)
   .fail(failure);
 };
 
 const signOut = (success, failure) => {
-  // if (!app.user) bad;
   $.ajax({
     method: 'DELETE',
     url: app.api + '/sign-out/' + app.user.id,

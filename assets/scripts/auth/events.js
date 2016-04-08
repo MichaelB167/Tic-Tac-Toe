@@ -1,6 +1,6 @@
 'use strict';
 
-//const getFormFields = require('../../../lib/get-form-fields');
+const getFormFields = require('../../../lib/get-form-fields');
 
 const authApi = require('./api');
 const authUi = require('./ui');
@@ -20,9 +20,9 @@ $('#signInModal').on('submit', function (event) {
   });
 $('#signOutModal').on('submit', function (event) {
       //get data, prevents default
-      event.preventDefault();
-      authApi.signOut(authUi.success, authUi.failure);
-    });
+    event.preventDefault();
+    authApi.signOut(authUi.success, authUi.failure);
+  });
 $('#changePasswordModal').on('submit', function(event) {
       let data = getFormFields(this);
       event.preventDefault();
