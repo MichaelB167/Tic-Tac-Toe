@@ -7,15 +7,15 @@ const authUi = require('./ui');
 
 const addHandlers = () => {
   $('#signUpModal').on('submit', function (event) {
+    event.preventDefault();
     let data = getFormFields(this);
     //get data, prevents default
-    event.preventDefault();
     authApi.signUp(authUi.success, authUi.failure, data);
   });
 $('#signInModal').on('submit', function (event) {
+    event.preventDefault();
     let data = getFormFields(this);
     //get data, prevents default
-    event.preventDefault();
     authApi.signIn(authUi.success, authUi.failure, data);
   });
 $('#signOutModal').on('submit', function (event) {
@@ -26,7 +26,7 @@ $('#signOutModal').on('submit', function (event) {
 $('#changePasswordModal').on('submit', function(event) {
       let data = getFormFields(this);
       event.preventDefault();
-      authApi.changePassword(authUi.success, authUi.failure, data);
+      authApi.updatePassword(authUi.success, authUi.failure, data);
     });
 };
 

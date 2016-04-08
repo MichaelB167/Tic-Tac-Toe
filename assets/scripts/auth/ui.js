@@ -12,7 +12,7 @@ const signOutSuccess = () => {
   console.log(app);
 };
 
-const changePasswordSuccess = () => {
+const updateSuccess = () => {
   console.log(app);
 };
 
@@ -29,5 +29,5 @@ module.exports = {
   success,
   signInSuccess,
   signOutSuccess,
-  changePasswordSuccess
+  updateSuccess
 };
