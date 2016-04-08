@@ -1,5 +1,7 @@
 # Project Components
 
+Game: <http://michaelb167.github.io/Tic-Tac-Toe/>
+
 ## Technologies Used
 
 I used HTML and CSS to style the page's front end.  To add the menu modals I
@@ -30,7 +32,7 @@ My project does not yet meet expectations as despite extensive troubleshooting
 I've been unable to fix broken AJAX requests, leaving me falling short of the
 final three deliverables.  I think my sign-up/in/out's were working at one point
 but I'm not yet very adept at testing their functionality so I may have been
-getting some form of a false positive.  I also haven't quite fixed the page 
+getting some form of a false positive.  I also haven't quite fixed the page
 display for mobile devices or styled the page as I had originally intended.
 
 ## User Stories
