@@ -29,7 +29,7 @@ $('#changePasswordModal').on('submit', function(event) {
       authApi.updatePassword(authUi.success, authUi.failure, data);
     });
 };
-
+//test
 module.exports = {
   addHandlers,
 };
