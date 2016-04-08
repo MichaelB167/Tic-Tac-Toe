@@ -4,7 +4,7 @@ Game: <http://michaelb167.github.io/Tic-Tac-Toe/>
 
 ## Technologies Used
 
-I used HTML and CSS to style the page's front end.  To add the menu modals I
+I used HTML and SCSS to style the page's front end.  To add the menu modals I
 applied bootsrap styling.  JQuery facilitates user interaction with the
 gameboard via click handlers and produces a display of the game's result upon a
 win or tie condition being met.  To communicate with the back end I used a
