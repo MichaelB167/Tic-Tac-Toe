@@ -35,16 +35,15 @@ const signOut = (success, failure) => {
 };
 
 const updatePassword = (success, failure, data) => {
-let form = {
-  "passwords": {
-    "old": data.credentials.oldpassword,
-    "new": data.credentials.newpassword
-  }
-};
   $.ajax({
     method: 'PATCH',
     url: app.api + '/change-password/' + app.user.id,
-    data: form,
+    data: {
+      "passwords": {
+        "old": data.credentials.oldpassword,
+        "new": data.credentials.newpassword
+      },
+    },
     headers: {
       Authorization: 'Token token=' + app.user.token,
     },
@@ -53,6 +52,50 @@ let form = {
   .fail(failure);
 };
 
+const createGame = (success, failure, data) => {
+  $.ajax({
+    method: "POST",
+    url: app.api + '/games',
+    headers: {
+      Authorization: 'Token token='+ app.user.token,
+    },
+    data,
+  })
+  .done(success)
+  .fail(failure);
+};
+
+const updateGame = (success, failure) => {
+  $.ajax({
+    method: 'PATCH',
+    url: app.api + '/games/' + app.game.id,
+    headers:{
+      Authorization: 'Token token=' + app.user.token,
+    },
+  })
+  .done(success)
+  .fail(failure);
+};
+
+const getGames = (success, failure) => {
+  $.ajax({
+    method: 'GET',
+    url: app.api + '/games',
+    headers:{
+      Authorization: 'Token token=' + app.user.token,
+    },
+  })
+  .done(success)
+  .fail(failure);
+};
+
+
 module.exports = {
-  signUp, signIn, signOut, updatePassword
+  signUp,
+  signIn,
+  signOut,
+  updatePassword,
+  createGame,
+  updateGame,
+  getGames
 };
