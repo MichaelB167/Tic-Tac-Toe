@@ -32,7 +32,7 @@ app.game = data.game;
 };
 
 const success = (data) => {
-  console.error(data);
+  console.log(data);
 };
 
 const failure = (error) => {

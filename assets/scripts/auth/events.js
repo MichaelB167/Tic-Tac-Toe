@@ -18,7 +18,7 @@ $('#signInModal').on('submit', function (event) {
     //get data, prevents default
     authApi.signIn(authUi.success, authUi.failure, data);
   });
-$('#signOutModal').on('submit', function (event) {
+$('#signOutBtn').on('click', function (event) {
       //get data, prevents default
     event.preventDefault();
     authApi.signOut(authUi.success, authUi.failure);
