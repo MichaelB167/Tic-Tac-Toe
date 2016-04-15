@@ -1,5 +1,7 @@
 'use strict';
 
+const authApi = require('./auth/api');
+
 let boardArray = ['', '', '', '', '', '', '', '', ''];
 
 let newArray = ["c0", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"];
@@ -18,9 +20,10 @@ let clear = function () {
  boardArray = ['', '', '', '', '', '', '', '', ''];
 };
 
-$("#reset").on("click", function() {
+$("#newGame").on("click", function() {
   clear();
   game = "active";
+  authApi.createGame();
 });
 
 let turn = function () {
