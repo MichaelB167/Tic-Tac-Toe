@@ -1,6 +1,7 @@
 'use strict';
 
-const app = require('../app-data');
+const app = require('../app-data.js');
+const gameLogic = require('../game-logic.js');
 
 const signUp = (success, failure, data) => {
   $.ajax({
@@ -23,6 +24,7 @@ const signIn = (success, failure, data) => {
 };
 
 const signOut = (success, failure) => {
+  console.log(app.user.id);
   $.ajax({
     method: 'DELETE',
     url: app.api + '/sign-out/' + app.user.id,
@@ -35,13 +37,14 @@ const signOut = (success, failure) => {
 };
 
 const updatePassword = (success, failure, data) => {
+  console.log(data);
   $.ajax({
     method: 'PATCH',
     url: app.api + '/change-password/' + app.user.id,
     data: {
       "passwords": {
-        "old": data.credentials.oldpassword,
-        "new": data.credentials.newpassword
+        "old": data.passwords.old,
+        "new": data.passwords.new
       },
     },
     headers: {
@@ -65,13 +68,22 @@ const createGame = (success, failure, data) => {
   .fail(failure);
 };
 
-const updateGame = (success, failure) => {
+const updateGame = (success, failure, playerValue, gameOver, index) => {
   $.ajax({
     method: 'PATCH',
     url: app.api + '/games/' + app.game.id,
     headers:{
       Authorization: 'Token token=' + app.user.token,
     },
+    data: {
+      "game": {
+        "cell": {
+          "index": index,
+          "value": playerValue
+        },
+        "over": gameOver
+      }
+    }
   })
   .done(success)
   .fail(failure);

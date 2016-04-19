@@ -12,9 +12,9 @@ const signInSuccess = (data) => {
   console.log(data);
 };
 
-const signOutSuccess = (data) => {
+const signOutSuccess = () => {
   app.user = null;
-  console.log(data);
+  console.log('successfully signed out')
 };
 
 const updatePasswordSuccess = () => {

@@ -1,6 +1,7 @@
 'use strict';
 
 const authApi = require('./auth/api');
+const ui = require('./auth/ui');
 
 let boardArray = ['', '', '', '', '', '', '', '', ''];
 
@@ -14,20 +15,22 @@ let playerXWins = 0;
 
 let playerOWins = 0;
 
+let lastTurn;
+
+let turn = function () {
+  if(turnCounter%2 === 0) {
+    lastTurn = "O";
+    return "X";
+  } else {
+    lastTurn = "X";
+    return "O";
+  }
+};
+
 let clear = function () {
  $(".square").text("");
  $(".player-wins").text("");
  boardArray = ['', '', '', '', '', '', '', '', ''];
-};
-
-$("#newGame").on("click", function() {
-  clear();
-  game = "active";
-  authApi.createGame();
-});
-
-let turn = function () {
-  return turnCounter%2 === 0 ? "X" : "O";
 };
 
 const ifWin = function () {
@@ -103,7 +106,8 @@ const isMoveValid = function(move) {
 };
 
 $(".square").on("click", function() {
-  const index = newArraySquare($(this).attr('id'));
+  let index = newArraySquare($(this).attr("id")); //data cell
+  let squareIndex = newArraySquare($(this).data("index"));
   if (isMoveValid(boardArray[index]) === true) {
     $(this).text(turn());
     boardArray[index] = turn();
@@ -114,5 +118,17 @@ $(".square").on("click", function() {
       $(this).text("O").addClass("player");
     }
     gameResult();
+    console.log(game, turn());
+    let gameOver = false;
+    if (game === "inactive") {
+      gameOver = true;
+    }
+    authApi.updateGame(ui.updateGameSuccess, ui.failure, lastTurn, gameOver, squareIndex);
   }
 });
+
+module.exports = {
+  turn,
+  clear,
+  game
+};
