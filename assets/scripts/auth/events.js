@@ -29,9 +29,9 @@ $('#changePasswordModal').on('submit', function(event) {
       authApi.updatePassword(authUi.updatePasswordSuccess, authUi.failure, data);
   });
 };
-$('#viewGameHistory').on("click", function(event) {
+$('#viewGameHistory').on("click", function(event, data) {
     event.preventDefault();
-    authApi.getGames(authUi.success, authUi.failure);
+    authApi.getGames(authUi.getGameSuccess, authUi.failure);
   });
 
   $("#newGame").on("click", function() {
