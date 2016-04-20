@@ -14,7 +14,7 @@ const signInSuccess = (data) => {
 
 const signOutSuccess = () => {
   app.user = null;
-  console.log('successfully signed out')
+  console.log('successfully signed out');
 };
 
 const updatePasswordSuccess = () => {
@@ -27,8 +27,15 @@ const createGameSuccess = (data) => {
 };
 
 const updateGameSuccess = (data) => {
-app.game = data.game;
+  app.game = data.game;
   console.log(data.game);
+};
+
+const getGameSuccess = (data) => {
+  app.game = data.game;
+  $('.game-history').text(JSON.stringify(data));
+  $('.game-history').text("You have played: " + data.games.length + " games");
+  console.log(data);
 };
 
 const success = (data) => {
@@ -47,5 +54,6 @@ module.exports = {
   signOutSuccess,
   updatePasswordSuccess,
   createGameSuccess,
-  updateGameSuccess
+  updateGameSuccess,
+  getGameSuccess
 };
