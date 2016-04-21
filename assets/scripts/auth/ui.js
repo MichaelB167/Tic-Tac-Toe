@@ -34,7 +34,7 @@ const updateGameSuccess = (data) => {
 const getGameSuccess = (data) => {
   app.game = data.game;
   $('.game-history').text(JSON.stringify(data));
-  $('.game-history').text("You have played: " + data.games.length + " games");
+  $('.game-history').text("You have played: " + data.games.length + " games.");
   console.log(data);
 };
 

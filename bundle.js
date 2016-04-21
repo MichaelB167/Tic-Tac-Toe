@@ -36,7 +36,7 @@ webpackJsonp([0],[
 
 	__webpack_require__(3);
 	var authEvents = __webpack_require__(4);
-	__webpack_require__(9);
+	__webpack_require__(6);
 
 	$(function () {
 	  authEvents.addHandlers();
@@ -52,35 +52,44 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var getFormFields = __webpack_require__(5);
-
-	var authApi = __webpack_require__(6);
-	var authUi = __webpack_require__(8);
+	var gameLogic = __webpack_require__(6);
+	var authApi = __webpack_require__(7);
+	var authUi = __webpack_require__(9);
 
 	var addHandlers = function addHandlers() {
 	  $('#signUpModal').on('submit', function (event) {
 	    event.preventDefault();
-	    var data = getFormFields(this);
+	    var data = getFormFields(event.target);
 	    //get data, prevents default
-	    authApi.signUp(authUi.success, authUi.failure, data);
+	    authApi.signUp(authUi.signUpSuccess, authUi.failure, data);
 	  });
 	  $('#signInModal').on('submit', function (event) {
 	    event.preventDefault();
-	    var data = getFormFields(this);
+	    var data = getFormFields(event.target);
 	    //get data, prevents default
-	    authApi.signIn(authUi.success, authUi.failure, data);
+	    authApi.signIn(authUi.signInSuccess, authUi.failure, data);
 	  });
-	  $('#signOutModal').on('submit', function (event) {
+	  $('#signOutBtn').on('click', function (event) {
 	    //get data, prevents default
 	    event.preventDefault();
-	    authApi.signOut(authUi.success, authUi.failure);
+	    authApi.signOut(authUi.signOutSuccess, authUi.failure);
 	  });
 	  $('#changePasswordModal').on('submit', function (event) {
-	    var data = getFormFields(this);
+	    var data = getFormFields(event.target);
 	    event.preventDefault();
-	    authApi.updatePassword(authUi.success, authUi.failure, data);
+	    authApi.updatePassword(authUi.updatePasswordSuccess, authUi.failure, data);
 	  });
 	};
-	//test
+	$('#viewGameHistory').on("click", function (event, data) {
+	  event.preventDefault();
+	  authApi.getGames(authUi.getGameSuccess, authUi.failure);
+	});
+
+	$("#newGame").on("click", function () {
+	  gameLogic.clear();
+	  authApi.createGame(authUi.createGameSuccess, authUi.failure);
+	});
+
 	module.exports = {
 	  addHandlers: addHandlers
 	};
@@ -157,110 +166,8 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	var app = __webpack_require__(7);
-
-	var signUp = function signUp(success, failure, data) {
-	  $.ajax({
-	    method: 'POST',
-	    url: app.api + '/sign-up',
-	    data: data
-	  }).done(success).fail(failure);
-	};
-
-	var signIn = function signIn(success, failure, data) {
-	  $.ajax({
-	    method: 'POST',
-	    url: app.api + '/sign-in',
-	    data: data
-	  }).done(success).fail(failure);
-	};
-
-	var signOut = function signOut(success, failure) {
-	  $.ajax({
-	    method: 'DELETE',
-	    url: app.api + '/sign-out/' + app.user.id,
-	    headers: {
-	      Authorization: 'Token token=' + app.user.token
-	    }
-	  }).done(success).fail(failure);
-	};
-
-	var updatePassword = function updatePassword(success, failure, data) {
-	  var form = {
-	    "passwords": {
-	      "old": data.credentials.oldpassword,
-	      "new": data.credentials.newpassword
-	    }
-	  };
-	  $.ajax({
-	    method: 'PATCH',
-	    url: app.api + '/change-password/' + app.user.id,
-	    data: form,
-	    headers: {
-	      Authorization: 'Token token=' + app.user.token
-	    }
-	  }).done(success).fail(failure);
-	};
-
-	module.exports = {
-	  signUp: signUp, signIn: signIn, signOut: signOut, updatePassword: updatePassword
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	var app = {
-	  api: 'http://tic-tac-toe.wdibos.com'
-	};
-	module.exports = app;
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var app = __webpack_require__(7);
-
-	var signInSuccess = function signInSuccess(data) {
-	  app.user = data.user;
-	  console.log(app);
-	};
-
-	var signOutSuccess = function signOutSuccess() {
-	  app.user = null;
-	  console.log(app);
-	};
-
-	var updateSuccess = function updateSuccess() {
-	  console.log(app);
-	};
-
-	var success = function success(data) {
-	  console.log(data);
-	};
-
-	var failure = function failure(error) {
-	  console.error(error);
-	};
-
-	module.exports = {
-	  failure: failure,
-	  success: success,
-	  signInSuccess: signInSuccess,
-	  signOutSuccess: signOutSuccess,
-	  updateSuccess: updateSuccess
-	};
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	var authApi = __webpack_require__(7);
+	var ui = __webpack_require__(9);
 
 	var boardArray = ['', '', '', '', '', '', '', '', ''];
 
@@ -274,19 +181,22 @@ webpackJsonp([0],[
 
 	var playerOWins = 0;
 
+	var lastTurn = void 0;
+
+	var turn = function turn() {
+	  if (turnCounter % 2 === 0) {
+	    lastTurn = "O";
+	    return "X";
+	  } else {
+	    lastTurn = "X";
+	    return "O";
+	  }
+	};
+
 	var clear = function clear() {
 	  $(".square").text("");
 	  $(".player-wins").text("");
 	  boardArray = ['', '', '', '', '', '', '', '', ''];
-	};
-
-	$("#reset").on("click", function () {
-	  clear();
-	  game = "active";
-	});
-
-	var turn = function turn() {
-	  return turnCounter % 2 === 0 ? "X" : "O";
 	};
 
 	var ifWin = function ifWin() {
@@ -362,7 +272,8 @@ webpackJsonp([0],[
 	};
 
 	$(".square").on("click", function () {
-	  var index = newArraySquare($(this).attr('id'));
+	  var index = newArraySquare($(this).attr("id")); //data cell
+	  var squareIndex = newArraySquare($(this).data("index"));
 	  if (isMoveValid(boardArray[index]) === true) {
 	    $(this).text(turn());
 	    boardArray[index] = turn();
@@ -373,8 +284,200 @@ webpackJsonp([0],[
 	      $(this).text("O").addClass("player");
 	    }
 	    gameResult();
+	    console.log(game, turn());
+	    var gameOver = false;
+	    if (game === "inactive") {
+	      gameOver = true;
+	    }
+	    authApi.updateGame(ui.updateGameSuccess, ui.failure, lastTurn, gameOver, squareIndex);
 	  }
 	});
+
+	module.exports = {
+	  turn: turn,
+	  clear: clear,
+	  game: game
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var app = __webpack_require__(8);
+	var gameLogic = __webpack_require__(6);
+
+	var signUp = function signUp(success, failure, data) {
+	  $.ajax({
+	    method: 'POST',
+	    url: app.api + '/sign-up',
+	    data: data
+	  }).done(success).fail(failure);
+	};
+
+	var signIn = function signIn(success, failure, data) {
+	  $.ajax({
+	    method: 'POST',
+	    url: app.api + '/sign-in',
+	    data: data
+	  }).done(success).fail(failure);
+	};
+
+	var signOut = function signOut(success, failure) {
+	  console.log(app.user.id);
+	  $.ajax({
+	    method: 'DELETE',
+	    url: app.api + '/sign-out/' + app.user.id,
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    }
+	  }).done(success).fail(failure);
+	};
+
+	var updatePassword = function updatePassword(success, failure, data) {
+	  console.log(data);
+	  $.ajax({
+	    method: 'PATCH',
+	    url: app.api + '/change-password/' + app.user.id,
+	    data: {
+	      "passwords": {
+	        "old": data.passwords.old,
+	        "new": data.passwords.new
+	      }
+	    },
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    }
+	  }).done(success).fail(failure);
+	};
+
+	var createGame = function createGame(success, failure, data) {
+	  $.ajax({
+	    method: "POST",
+	    url: app.api + '/games',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: data
+	  }).done(success).fail(failure);
+	};
+
+	var updateGame = function updateGame(success, failure, playerValue, gameOver, index) {
+	  $.ajax({
+	    method: 'PATCH',
+	    url: app.api + '/games/' + app.game.id,
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: {
+	      "game": {
+	        "cell": {
+	          "index": index,
+	          "value": playerValue
+	        },
+	        "over": gameOver
+	      }
+	    }
+	  }).done(success).fail(failure);
+	};
+
+	var getGames = function getGames(success, failure) {
+	  $.ajax({
+	    method: 'GET',
+	    url: app.api + '/games',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    }
+	  }).done(success).fail(failure);
+	};
+
+	module.exports = {
+	  signUp: signUp,
+	  signIn: signIn,
+	  signOut: signOut,
+	  updatePassword: updatePassword,
+	  createGame: createGame,
+	  updateGame: updateGame,
+	  getGames: getGames
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var app = {
+	  api: 'http://tic-tac-toe.wdibos.com'
+	};
+	module.exports = app;
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var app = __webpack_require__(8);
+
+	var signUpSuccess = function signUpSuccess(data) {
+	  app.user = data.user;
+	  console.log(data);
+	};
+
+	var signInSuccess = function signInSuccess(data) {
+	  app.user = data.user;
+	  console.log(data);
+	};
+
+	var signOutSuccess = function signOutSuccess() {
+	  app.user = null;
+	  console.log('successfully signed out');
+	};
+
+	var updatePasswordSuccess = function updatePasswordSuccess() {
+	  console.log('changed password');
+	};
+
+	var createGameSuccess = function createGameSuccess(data) {
+	  app.game = data.game;
+	  console.log(data);
+	};
+
+	var updateGameSuccess = function updateGameSuccess(data) {
+	  app.game = data.game;
+	  console.log(data.game);
+	};
+
+	var getGameSuccess = function getGameSuccess(data) {
+	  app.game = data.game;
+	  $('.game-history').text(JSON.stringify(data));
+	  $('.game-history').text("You have played: " + data.games.length + " games.");
+	  console.log(data);
+	};
+
+	var success = function success(data) {
+	  console.log(data);
+	};
+
+	var failure = function failure(error) {
+	  console.error(error);
+	};
+
+	module.exports = {
+	  failure: failure,
+	  success: success,
+	  signInSuccess: signInSuccess,
+	  signUpSuccess: signUpSuccess,
+	  signOutSuccess: signOutSuccess,
+	  updatePasswordSuccess: updatePasswordSuccess,
+	  createGameSuccess: createGameSuccess,
+	  updateGameSuccess: updateGameSuccess,
+	  getGameSuccess: getGameSuccess
+	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
