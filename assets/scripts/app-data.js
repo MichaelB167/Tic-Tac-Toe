@@ -1,6 +1,6 @@
 'use strict';
 
 const app = {
-  api: 'http://tic-tac-toe.wdibos.com',
+  api: 'https://git.heroku.com/mb-tic-tac-toe-api.git',
 };
 module.exports = app;
