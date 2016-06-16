@@ -1,17 +1,22 @@
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:200);
+
+$titillium: Titillium Web, sans-serif;
+
 body {
-  background-color: $background-color;
+  background-color: $blue-scale-5;
+  font-family: $titillium;
 }
 
 header {
   color: $font-color;
   float: left;
   font-style: 100% helvetica, serif;
-  margin-left: 15%;
-  margin-top: -15px;
+  margin-left: 25%;
+  margin-top: -12px;
 }
 
 .navbar {
-  background-color: $dark-blue;
+  background-color: $blue-scale-3;
 }
 
 .nav-buttons {
@@ -41,7 +46,7 @@ header {
 
 .square {
   border: solid 5px;
-  border-color: $border-color;
+  border-color: $blue-scale-1;
   display: table-cell;
   height: 150px;
   width: 150px;
