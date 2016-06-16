@@ -34,7 +34,8 @@ $('#viewGameHistory').on("click", function(event, data) {
     authApi.getGames(authUi.getGameSuccess, authUi.failure);
   });
 
-  $("#newGame").on("click", function() {
+  $("#newGame").on("click", function(event) {
+    event.preventDefault();
     gameLogic.clear();
     authApi.createGame(authUi.createGameSuccess, authUi.failure);
   });

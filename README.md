@@ -26,15 +26,6 @@ containing requirements rather than code as well as created separate directories
 for files such as AJAX requests and event handlers.  To backup and track my
 project, I made frequent and descriptive commits to my project repository.
 
-## Unsolved Problems
-
-My project does not yet meet expectations as despite extensive troubleshooting
-I've been unable to fix broken AJAX requests, leaving me falling short of the
-final three deliverables.  I think my sign-up/in/out's were working at one point
-but I'm not yet very adept at testing their functionality so I may have been
-getting some form of a false positive.  I also haven't quite fixed the page
-display for mobile devices or styled the page as I had originally intended.
-
 ## User Stories
 
 1.  As a user, I want to be able to sign up so I create an account and sign in.
