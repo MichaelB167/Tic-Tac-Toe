@@ -87,7 +87,7 @@ webpackJsonp([0],[
 
 	$("#newGame").on("click", function (event) {
 	  event.preventDefault();
-	  gameLogic.clear();
+	  gameLogic.reset();
 	  authApi.createGame(authUi.createGameSuccess, authUi.failure);
 	});
 
@@ -194,10 +194,11 @@ webpackJsonp([0],[
 	  }
 	};
 
-	var clear = function clear() {
+	var reset = function reset() {
 	  $(".square").text("");
 	  $(".player-wins").text("");
 	  boardArray = ['', '', '', '', '', '', '', '', ''];
+	  game = "active";
 	};
 
 	var ifWin = function ifWin() {
@@ -296,7 +297,7 @@ webpackJsonp([0],[
 
 	module.exports = {
 	  turn: turn,
-	  clear: clear,
+	  reset: reset,
 	  game: game
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
