@@ -36,7 +36,7 @@ $('#viewGameHistory').on("click", function(event, data) {
 
   $("#newGame").on("click", function(event) {
     event.preventDefault();
-    gameLogic.clear();
+    gameLogic.reset();
     authApi.createGame(authUi.createGameSuccess, authUi.failure);
   });
 
