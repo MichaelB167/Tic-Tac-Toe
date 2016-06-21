@@ -27,10 +27,11 @@ let turn = function () {
   }
 };
 
-let clear = function () {
+const reset = function () {
  $(".square").text("");
  $(".player-wins").text("");
  boardArray = ['', '', '', '', '', '', '', '', ''];
+ game = "active";
 };
 
 const ifWin = function () {
@@ -129,6 +130,6 @@ $(".square").on("click", function() {
 
 module.exports = {
   turn,
-  clear,
+  reset,
   game
 };
